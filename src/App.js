@@ -5,6 +5,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+      <div class="marquee-rtl">
+          <div>Type your message here.</div>
+      </div>
         <img src={logo} className="App-logo" alt="logo" />
         Meilleure plateforme
         <p>
