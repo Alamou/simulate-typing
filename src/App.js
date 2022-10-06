@@ -1,44 +1,58 @@
 import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
+import { useLocation } from 'react-router-dom';
+
 function App() {
   var simulateTyping = {
-    text: 'Meilleur plateforme',
-    image:[
-      window.location.href + '/flag-benin.png'
+    pays: [ // Définition du nom des Pays
+      'Benin',
+      'Mali',
+      'Togo'
     ],
-    imageH: "50px",
-    imageW: "50px",
+    drapeau:[ // Définition du drapau des pays. Les drapeaux doivent suivrent l'ordre de définition des noms de pays.
+      './image/flag-benin.png',
+      './image/ml.png',
+      './image/tg.png'
+    ],
+    imageH: "20px", // Hauteur de l'image.
+    imageW: "20px", // Largeur de l'image.
     delai: 3000,
     selector: '.simulate-typing'
   }
 
 
-  var typingContent = '<span>' + simulateTyping.text.split('').join('</span><span>') + '</span>';
-  if(simulateTyping.image.length > 0) {
-    simulateTyping.image.forEach(imgUrl => {
-      typingContent += '<img src="'+imgUrl+'" height="'+simulateTyping.imageH+'" height="'+simulateTyping.imageW+'">';
-    });
-  }
+  var typingContent = '';
+  let compteur = 0;
+  setInterval(function(){
 
+    if(typeof simulateTyping.pays[compteur] === "undefined") {
+      compteur = 0;
+    }
+    let eText = simulateTyping.pays[compteur];
+    let ekey = compteur;
+    typingContent = '<span>' + eText.split('').join('</span><span>') + ' </span>';
+    if(typeof simulateTyping.drapeau[ekey] !== "undefined") {
+      typingContent += '<img src="'+
+      simulateTyping.drapeau[ekey]+'" height="'+
+      simulateTyping.imageH+'" height="'+
+      simulateTyping.imageW+'"> ';
+      ++compteur;
+    }
 
-  setInterval(() => {
-    $(simulateTyping.selector).html('');
-    $(typingContent).hide().appendTo(simulateTyping.selector).each(function (i) {
-      $(this).delay(100 * i).css({
-          display: 'inline',
-          opacity: 0
-      }).animate({
-          opacity: 1
-      }, 100);
-  });
-  }, simulateTyping.delai);
+    $(simulateTyping.selector).html(typingContent); 
+  }, simulateTyping.delai)
 
   return (
     <div className="App">
       <header className="App-header">
       <div className="marquee-rtl">
-          <div>Type your message here.</div>
+          <div>
+            <span>Bitcoin (BTC)</span>
+            <span className="rate">0,00123 $(USD)</span>
+            <span>LiteCoin (Ltc)</span>
+            <span className="rate">0,00123 $(USD)</span>
+          </div>
       </div>
         <img src={logo} className="App-logo" alt="logo" />
         Meilleure plateforme

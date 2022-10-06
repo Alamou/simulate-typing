@@ -1,34 +1,37 @@
 body {
+  background: #111;
+  color: #f0f0f0;
+  font-family: monospace !important;
+  font-size: 24px;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  place-content: center;
+  overflow: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 /* le block conteneur */
 .marquee-rtl {
-  max-width: 100%;                      /* largeur de la fenêtre */
-  margin: 1em auto 2em;
-  border: 10px solid #F0F0FF;
-  overflow: hidden;                     /* masque tout ce qui dépasse */
-  box-shadow: 0 .25em .5em #CCC,inset 0 0 1em .25em #CCC;
+  background-color: #fff;
+  color: #000;
+  width: 100%;
+  padding: .5em;
+  overflow: hidden !important;
+}
+
+.rate {
+  color: rgb(1, 136, 109);
 }
 
 /* le bloc défilant */
-.marquee-rtl > :first-child {
+.marquee-rtl * {
   display: inline-block;                /* modèle de boîte en ligne */
   padding-right: 2em;                   /* un peu d'espace pour la transition */
-  padding-left: 100%;                   /* placement à droite du conteneur */
+  padding-left: 5%;                   /* placement à droite du conteneur */
   white-space: nowrap;                  /* pas de passage à la ligne */
   animation: defilement-rtl 15s infinite linear;
+  
 }
+
 
 @keyframes defilement-rtl {
   0% {
@@ -36,5 +39,30 @@ code {
   }
   100% {
     transform: translate3d(-100%,0,0);  /* position finale à gauche */
+  }
+}
+
+.simulate-typing {
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typewriter 2s steps(13) infinite alternate,
+    blink 800ms steps(13) infinite normal;
+  border-right: 5px solid rgb(255, 255, 255);
+}
+
+@keyframes typewriter {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 8%;
+  }
+}
+@keyframes blink {
+  from {
+    border-color: rgb(255, 255, 255);
+  }
+  to {
+    border-color: transparent;
   }
 }
